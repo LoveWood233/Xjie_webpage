@@ -1,0 +1,132 @@
+:root {
+  --bg: #f2f7ff;
+  --blue: #1e4fa9;
+  --deep: #103a86;
+  --cyan: #2dbdbe;
+  --text: #0f2f61;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.container {
+  width: min(1080px, 92vw);
+  margin: 0 auto;
+}
+
+.hero {
+  background: linear-gradient(130deg, var(--blue), #2b58bc 48%, #22469f);
+  color: #fff;
+  padding: 48px 0;
+}
+
+.hero-inner {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.logo {
+  width: 220px;
+  background: #ffffff12;
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.tag {
+  letter-spacing: 2px;
+  opacity: 0.85;
+  margin-bottom: 8px;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(30px, 4vw, 48px);
+}
+
+.hero p { margin-top: 12px; }
+
+main { padding: 28px 0 42px; }
+
+.panel {
+  background: #fff;
+  border: 2px solid #d8e5ff;
+  border-radius: 14px;
+  padding: 22px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 24px #123b8210;
+}
+
+.panel h2 {
+  margin: 0 0 12px;
+  color: var(--deep);
+  font-size: clamp(24px, 2.8vw, 34px);
+}
+
+.panel h2 span {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: clamp(14px, 1.5vw, 20px);
+  color: #3c65b6;
+}
+
+.grid-two {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 20px;
+}
+
+.highlight {
+  background: linear-gradient(90deg, #e9f0ff, #f7fbff);
+  border-left: 4px solid var(--cyan);
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.steps {
+  margin-top: 16px;
+  display: grid;
+  gap: 10px;
+}
+
+.step {
+  background: linear-gradient(100deg, #2f62be, #2a91cb);
+  color: #fff;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.loop {
+  background: linear-gradient(165deg, #264ea6, #1f3f8a);
+  color: #fff;
+}
+
+.loop h2,
+.loop h2 span { color: #fff; }
+
+.loop ol {
+  margin: 14px 0 0;
+  padding-left: 18px;
+  line-height: 1.9;
+}
+
+.vision {
+  background: linear-gradient(120deg, #234ea6, #1d4496);
+  color: #fff;
+}
+
+.vision h2,
+.vision h2 span { color: #fff; }
+
+@media (max-width: 860px) {
+  .hero-inner { flex-direction: column; text-align: center; }
+  .grid-two { grid-template-columns: 1fr; }
+}
