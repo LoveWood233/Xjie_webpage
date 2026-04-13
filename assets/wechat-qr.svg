@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" role="img" aria-label="微信公众号二维码">
+  <rect width="220" height="220" fill="#fff"/>
+  <rect x="12" y="12" width="196" height="196" fill="none" stroke="#103a86" stroke-width="8"/>
+  <rect x="26" y="26" width="44" height="44" fill="#103a86"/>
+  <rect x="34" y="34" width="28" height="28" fill="#fff"/>
+  <rect x="150" y="26" width="44" height="44" fill="#103a86"/>
+  <rect x="158" y="34" width="28" height="28" fill="#fff"/>
+  <rect x="26" y="150" width="44" height="44" fill="#103a86"/>
+  <rect x="34" y="158" width="28" height="28" fill="#fff"/>
+  <g fill="#103a86">
+    <rect x="84" y="30" width="12" height="12"/>
+    <rect x="102" y="30" width="12" height="12"/>
+    <rect x="120" y="30" width="12" height="12"/>
+    <rect x="138" y="48" width="12" height="12"/>
+    <rect x="84" y="60" width="12" height="12"/>
+    <rect x="102" y="60" width="12" height="12"/>
+    <rect x="120" y="78" width="12" height="12"/>
+    <rect x="138" y="78" width="12" height="12"/>
+    <rect x="84" y="96" width="12" height="12"/>
+    <rect x="102" y="96" width="12" height="12"/>
+    <rect x="120" y="96" width="12" height="12"/>
+    <rect x="138" y="96" width="12" height="12"/>
+    <rect x="156" y="96" width="12" height="12"/>
+    <rect x="84" y="114" width="12" height="12"/>
+    <rect x="120" y="114" width="12" height="12"/>
+    <rect x="156" y="114" width="12" height="12"/>
+    <rect x="84" y="132" width="12" height="12"/>
+    <rect x="102" y="132" width="12" height="12"/>
+    <rect x="120" y="132" width="12" height="12"/>
+    <rect x="138" y="132" width="12" height="12"/>
+    <rect x="156" y="132" width="12" height="12"/>
+    <rect x="84" y="150" width="12" height="12"/>
+    <rect x="120" y="150" width="12" height="12"/>
+    <rect x="156" y="150" width="12" height="12"/>
+    <rect x="84" y="168" width="12" height="12"/>
+    <rect x="102" y="168" width="12" height="12"/>
+    <rect x="120" y="168" width="12" height="12"/>
+    <rect x="138" y="168" width="12" height="12"/>
+    <rect x="156" y="168" width="12" height="12"/>
+  </g>
+</svg>
