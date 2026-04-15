@@ -1,68 +1,674 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>小捷健康 - 隐私政策</title>
-<style>
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.8; color: #333; }
-  h1 { color: #1a1a1a; border-bottom: 2px solid #007AFF; padding-bottom: 10px; }
-  h2 { color: #333; margin-top: 30px; }
-  .update { color: #666; font-size: 14px; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="./assets/logo.png">
+    <link rel="shortcut icon" href="./assets/logo.png">
+    <title>小捷健康 - 隐私政策</title>
+    <style>
+        :root {
+            --bg: #0D0B14;
+            --bg-2: #12101a;
+            --panel: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.10);
+            --muted: #A0A0B0;
+            --muted-2: #505060;
+            --green: #2ECA7F;
+            --purple: #7B61FF;
+            --text: #ffffff;
+            --cyan: #00F2FF;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        html, body { height: 100%; }
+
+        body {
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        ::selection { background: rgba(46, 202, 127, 0.30); }
+        a { color: inherit; text-decoration: none; }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: #1A1625; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--green); }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Background layers */
+        .bg-layer {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background: linear-gradient(to bottom, var(--bg), var(--bg), var(--bg-2));
+        }
+
+        .glow-top {
+            position: fixed;
+            top: -10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 600px;
+            background: rgba(123, 97, 255, 0.05);
+            filter: blur(150px);
+            border-radius: 999px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .glow-bottom {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 500px;
+            height: 500px;
+            background: rgba(46, 202, 127, 0.05);
+            filter: blur(120px);
+            border-radius: 999px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .content-layer {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(13, 11, 20, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .nav-inner {
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 800;
+            font-size: 20px;
+            color: white;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 900;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.5;
+            display: block;
+        }
+
+        img.logo-icon {
+            width: 36px;
+            height: 36px;
+            object-fit: cover;
+            opacity: 0.5;
+            display: block;
+            border-radius: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--muted);
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: #ffffff; }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            padding: 10px 24px;
+            background: var(--green);
+            color: var(--bg);
+            font-size: 14px;
+            font-weight: 800;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.16s ease, background 0.16s ease;
+            box-shadow: 0 12px 40px rgba(46, 202, 127, 0.20);
+        }
+
+        .btn-primary:hover { background: #39df8f; transform: scale(1.05); }
+
+        /* Mobile nav */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+        }
+
+        /* Privacy content */
+        .privacy-page {
+            padding: 120px 0 80px;
+        }
+
+        .privacy-header {
+            max-width: 800px;
+            margin: 0 auto 48px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .privacy-header h1 {
+            font-size: 42px;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            background: linear-gradient(to right, var(--green), var(--purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        @media (min-width: 768px) {
+            .privacy-header h1 { font-size: 56px; }
+        }
+
+        .update {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .privacy-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .privacy-content > p {
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .privacy-content h2 {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--text);
+            margin-top: 48px;
+            margin-bottom: 16px;
+            padding-left: 16px;
+            border-left: 3px solid var(--green);
+        }
+
+        .privacy-content ul {
+            list-style: none;
+            display: grid;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .privacy-content ul li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.80);
+            line-height: 1.7;
+            padding: 16px 20px;
+            border-radius: 12px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            transition: border-color 0.25s ease, background 0.25s ease;
+        }
+
+        .privacy-content ul li:hover {
+            border-color: rgba(46, 202, 127, 0.25);
+            background: rgba(46, 202, 127, 0.04);
+        }
+
+        .privacy-content ul li::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: var(--green);
+            flex-shrink: 0;
+            margin-top: 8px;
+        }
+
+        .privacy-content ul li strong {
+            color: var(--text);
+        }
+
+        .privacy-content > p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Section card wrapper */
+        .privacy-section {
+            padding: 32px 36px;
+            border-radius: 20px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            margin-bottom: 24px;
+            transition: border-color 0.25s ease;
+        }
+
+        .privacy-section:hover {
+            border-color: rgba(123, 97, 255, 0.20);
+        }
+
+        .privacy-section h2 {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--text);
+            margin-top: 0;
+            margin-bottom: 16px;
+            padding-left: 14px;
+            border-left: 3px solid var(--green);
+        }
+
+        .privacy-section p {
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .privacy-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .privacy-section ul {
+            list-style: none;
+            display: grid;
+            gap: 10px;
+            margin-bottom: 0;
+        }
+
+        .privacy-section ul li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.80);
+            line-height: 1.7;
+        }
+
+        .privacy-section ul li::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: var(--green);
+            flex-shrink: 0;
+            margin-top: 8px;
+        }
+
+        .privacy-section ul li strong {
+            color: var(--text);
+        }
+
+        /* Contact highlight */
+        .contact-highlight {
+            margin-top: 48px;
+            padding: 32px 36px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(46, 202, 127, 0.08), rgba(123, 97, 255, 0.08));
+            border: 1px solid rgba(46, 202, 127, 0.20);
+        }
+
+        .contact-highlight h2 {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--green);
+            margin-bottom: 16px;
+        }
+
+        .contact-highlight p {
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+
+        .contact-highlight p:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-highlight a {
+            color: var(--green);
+            transition: color 0.2s;
+        }
+
+        .contact-highlight a:hover {
+            color: #39df8f;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 60px 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            background: var(--bg);
+        }
+
+        .footer-inner {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            align-items: center;
+            text-align: center;
+        }
+
+        .footer-info {
+            color: var(--muted-2);
+            font-size: 13px;
+        }
+
+        .footer-links-bottom {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links-bottom a {
+            font-size: 13px;
+            color: var(--muted-2);
+            transition: color 0.2s;
+        }
+
+        .footer-links-bottom a:hover { color: var(--green); }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-<h1>隐私政策</h1>
-<p class="update">最后更新日期：2026年4月9日</p>
+    <div class="bg-layer" aria-hidden="true">
+        <canvas id="particles"></canvas>
+    </div>
+    <div class="glow-top" aria-hidden="true"></div>
+    <div class="glow-bottom" aria-hidden="true"></div>
 
-<p>小捷健康（以下简称"我们"）非常重视您的隐私。本隐私政策说明我们如何收集、使用、存储和保护您的个人信息。</p>
+    <div class="content-layer">
+        <!-- Navigation -->
+        <nav class="nav" aria-label="主导航">
+            <div class="container nav-inner">
+                <a href="./index.html" class="logo">
+                    <img src="./assets/logo.png" alt="Logo" class="logo-icon">
+                    <span>合肥简捷爱科技有限公司</span>
+                </a>
+                <div class="nav-links">
+                    <a href="">公司简介</a>
+                    <a href="">科研成果</a>
+                    <a href="">商业模式</a>
+                    <a href="">公司愿景</a>
+                    <a href="" class="btn-primary">联系我们</a>
+                </div>
+            </div>
+        </nav>
 
-<h2>1. 信息收集</h2>
-<p>我们可能收集以下信息：</p>
-<ul>
-  <li><strong>账户信息：</strong>手机号码，用于注册和登录。</li>
-  <li><strong>健康数据：</strong>您主动上传的体检报告、病例记录、血糖监测数据等。</li>
-  <li><strong>设备信息：</strong>设备型号、操作系统版本，用于优化应用体验。</li>
-</ul>
+        <main>
+            <section class="privacy-page">
+                <div class="container">
+                    <div class="privacy-header fade-in">
+                        <h1>隐私政策</h1>
+                        <p class="update">最后更新日期：2026年4月9日</p>
+                    </div>
 
-<h2>2. 信息使用</h2>
-<p>我们使用您的信息用于：</p>
-<ul>
-  <li>为您提供健康数据管理和分析服务。</li>
-  <li>通过 AI 技术帮助整理和解读您的健康报告。</li>
-  <li>改善和优化我们的产品和服务。</li>
-</ul>
+                    <div class="privacy-content">
+                        <p class="fade-in">小捷健康（以下简称"我们"）非常重视您的隐私。本隐私政策说明我们如何收集、使用、存储和保护您的个人信息。</p>
 
-<h2>3. 信息存储与安全</h2>
-<ul>
-  <li>您的数据存储在安全的云服务器上，采用加密传输（HTTPS/TLS）。</li>
-  <li>我们采取合理的技术和管理措施保护您的个人信息安全。</li>
-  <li>仅经授权的人员可以访问您的数据。</li>
-</ul>
+                        <div class="privacy-section fade-in">
+                            <h2>1. 信息收集</h2>
+                            <p>我们可能收集以下信息：</p>
+                            <ul>
+                                <li><strong>账户信息：</strong>手机号码，用于注册和登录。</li>
+                                <li><strong>健康数据：</strong>您主动上传的体检报告、病例记录、血糖监测数据等。</li>
+                                <li><strong>设备信息：</strong>设备型号、操作系统版本，用于优化应用体验。</li>
+                            </ul>
+                        </div>
 
-<h2>4. 信息共享</h2>
-<p>我们不会向任何第三方出售、出租或交换您的个人信息，除非：</p>
-<ul>
-  <li>获得您的明确同意。</li>
-  <li>根据法律法规要求或政府部门的强制要求。</li>
-</ul>
+                        <div class="privacy-section fade-in">
+                            <h2>2. 信息使用</h2>
+                            <p>我们使用您的信息用于：</p>
+                            <ul>
+                                <li>为您提供健康数据管理和分析服务。</li>
+                                <li>通过 AI 技术帮助整理和解读您的健康报告。</li>
+                                <li>改善和优化我们的产品和服务。</li>
+                            </ul>
+                        </div>
 
-<h2>5. AI 数据处理</h2>
-<p>我们使用人工智能技术处理您上传的健康文档，提取结构化数据并生成分析报告。AI 处理仅用于为您提供服务，不会将您的数据用于模型训练。</p>
+                        <div class="privacy-section fade-in">
+                            <h2>3. 信息存储与安全</h2>
+                            <ul>
+                                <li>您的数据存储在安全的云服务器上，采用加密传输（HTTPS/TLS）。</li>
+                                <li>我们采取合理的技术和管理措施保护您的个人信息安全。</li>
+                                <li>仅经授权的人员可以访问您的数据。</li>
+                            </ul>
+                        </div>
 
-<h2>6. 您的权利</h2>
-<p>您有权：</p>
-<ul>
-  <li>访问和查看您的个人数据。</li>
-  <li>删除您的账户及相关数据。</li>
-  <li>撤回数据处理的同意。</li>
-</ul>
+                        <div class="privacy-section fade-in">
+                            <h2>4. 信息共享</h2>
+                            <p>我们不会向任何第三方出售、出租或交换您的个人信息，除非：</p>
+                            <ul>
+                                <li>获得您的明确同意。</li>
+                                <li>根据法律法规要求或政府部门的强制要求。</li>
+                            </ul>
+                        </div>
 
-<h2>7. 联系我们</h2>
-<p>如您对本隐私政策有任何疑问，请通过以下方式联系我们：</p>
-<p>邮箱：support@xjie-health.com</p>
+                        <div class="privacy-section fade-in">
+                            <h2>5. AI 数据处理</h2>
+                            <p>我们使用人工智能技术处理您上传的健康文档，提取结构化数据并生成分析报告。AI 处理仅用于为您提供服务，不会将您的数据用于模型训练。</p>
+                        </div>
 
-<h2>8. 政策变更</h2>
-<p>我们保留更新本隐私政策的权利。变更将在本页面发布，建议您定期查看。</p>
+                        <div class="privacy-section fade-in">
+                            <h2>6. 您的权利</h2>
+                            <p>您有权：</p>
+                            <ul>
+                                <li>访问和查看您的个人数据。</li>
+                                <li>删除您的账户及相关数据。</li>
+                                <li>撤回数据处理的同意。</li>
+                            </ul>
+                        </div>
+
+                        <div class="privacy-section fade-in">
+                            <h2>7. 联系我们</h2>
+                            <p>如您对本隐私政策有任何疑问，请通过以下方式联系我们：</p>
+                            <p>邮箱：<a href="mailto:hefeijianjieai@163.com">hefeijianjieai@163.com</a></p>
+                        </div>
+
+                        <div class="privacy-section fade-in" style="margin-top: 24px;">
+                            <h2>8. 政策变更</h2>
+                            <p>我们保留更新本隐私政策的权利。变更将在本页面发布，建议您定期查看。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-inner">
+                    <div class="logo" style="font-size: 16px;">
+                        <img src="./assets/logo.png" alt="Logo" class="logo-icon">
+                        <span>合肥简捷爱科技有限公司</span>
+                    </div>
+                    <div class="footer-links-bottom">
+                        <a href="./index.html#about">公司简介</a>
+                        <a href="./index.html#research">科研成果</a>
+                        <a href="./index.html#business">商业模式</a>
+                        <a href="./index.html#vision">公司愿景</a>
+                        <a href="./index.html#contact">联系我们</a>
+                    </div>
+                    <div class="footer-info">© 2026 合肥简捷爱科技有限公司. All rights reserved.</div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Particle animation
+        (function () {
+            const canvas = document.getElementById('particles');
+            if (!(canvas instanceof HTMLCanvasElement)) return;
+            const ctx = canvas.getContext('2d');
+            if (!ctx) return;
+
+            const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            let particles = [];
+            let mouse = { x: -100, y: -100 };
+            const connectionDistance = 180;
+            const mouseInfluence = 150;
+
+            function getParticleCount() {
+                return window.innerWidth < 768 ? 40 : 100;
+            }
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                canvas.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;opacity:0.4;pointer-events:none;';
+                init();
+            }
+
+            function init() {
+                const count = getParticleCount();
+                particles = [];
+                for (let i = 0; i < count; i++) {
+                    particles.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        vx: (Math.random() - 0.5) * 0.4,
+                        vy: (Math.random() - 0.5) * 0.4,
+                        size: Math.random() * 1.5 + 0.5,
+                    });
+                }
+            }
+
+            function draw() {
+                if (prefersReducedMotion) {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    return;
+                }
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                for (let i = 0; i < particles.length; i++) {
+                    const p = particles[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    const dxMouse = mouse.x - p.x;
+                    const dyMouse = mouse.y - p.y;
+                    const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+                    if (distMouse < mouseInfluence) {
+                        p.x += dxMouse * 0.005;
+                        p.y += dyMouse * 0.005;
+                    }
+
+                    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const p2 = particles[j];
+                        const dx = p.x - p2.x;
+                        const dy = p.y - p2.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < connectionDistance) {
+                            const opacity = (1 - dist / connectionDistance) * 0.4;
+                            ctx.strokeStyle = `rgba(123, 97, 255, ${opacity})`;
+                            ctx.lineWidth = 1.2;
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                requestAnimationFrame(draw);
+            }
+
+            window.addEventListener('resize', resize);
+            window.addEventListener('mousemove', (e) => {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+            });
+
+            resize();
+            draw();
+        })();
+
+        // Scroll-triggered fade-in animations
+        (function () {
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                },
+                { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+            );
+
+            document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+        })();
+    </script>
 </body>
 </html>
