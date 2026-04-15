@@ -1,80 +1,1099 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>小捷，你的养成系医疗管家</title>
-    <link rel="stylesheet" href="styles.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="./assets/logo.png">
+    <link rel="shortcut icon" href="./assets/logo.png">
+    <title>合肥简捷爱科技有限公司</title>
+    <meta name="description" content="基于多组学的精准健康智能体——融合临床医学、多组学与人工智能技术，为全民提供优质的康寿管理服务。">
+    <style>
+        :root {
+            --bg: #0D0B14;
+            --bg-2: #12101a;
+            --panel: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.10);
+            --muted: #A0A0B0;
+            --muted-2: #505060;
+            --green: #2ECA7F;
+            --purple: #7B61FF;
+            --text: #ffffff;
+            --cyan: #00F2FF;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        html, body { height: 100%; }
+
+        body {
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        ::selection { background: rgba(46, 202, 127, 0.30); }
+        a { color: inherit; text-decoration: none; }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: #1A1625; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--green); }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Background layers */
+        .bg-layer {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background: linear-gradient(to bottom, var(--bg), var(--bg), var(--bg-2));
+        }
+
+        .glow-top {
+            position: fixed;
+            top: -10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 600px;
+            background: rgba(123, 97, 255, 0.05);
+            filter: blur(150px);
+            border-radius: 999px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .glow-bottom {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 500px;
+            height: 500px;
+            background: rgba(46, 202, 127, 0.05);
+            filter: blur(120px);
+            border-radius: 999px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .content-layer {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(13, 11, 20, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .nav-inner {
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 800;
+            font-size: 20px;
+            color: white;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            overflow: hidden;
+            /* background: linear-gradient(135deg, var(--green), var(--purple)); */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 900;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.5;
+            display: block;
+        }
+
+        img.logo-icon {
+            width: 36px;
+            height: 36px;
+            object-fit: cover;
+            opacity: 0.5;
+            display: block;
+            border-radius: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--muted);
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: #ffffff; }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            padding: 10px 24px;
+            background: var(--green);
+            color: var(--bg);
+            font-size: 14px;
+            font-weight: 800;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.16s ease, background 0.16s ease;
+            box-shadow: 0 12px 40px rgba(46, 202, 127, 0.20);
+        }
+
+        .btn-primary:hover { background: #39df8f; transform: scale(1.05); }
+
+        /* Glass card */
+        .glass {
+            background: var(--panel);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 96px 0 64px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            font-size: 42px;
+        }
+
+        @media (min-width: 768px) {
+            .hero h1 { font-size: 76px; }
+        }
+
+        .hero-gradient {
+            background: linear-gradient(to right, var(--green), var(--purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            margin: 24px auto 0;
+            max-width: 52rem;
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--muted);
+            font-weight: 500;
+        }
+
+        @media (min-width: 768px) {
+            .hero-subtitle { font-size: 22px; }
+        }
+
+        .hero-badges {
+            margin-top: 36px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .badge {
+            padding: 8px 18px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 700;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--muted);
+        }
+
+        .badge-green {
+            border-color: rgba(46, 202, 127, 0.30);
+            color: var(--green);
+            background: rgba(46, 202, 127, 0.08);
+        }
+
+        .badge-purple {
+            border-color: rgba(123, 97, 255, 0.30);
+            color: var(--purple);
+            background: rgba(123, 97, 255, 0.08);
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 42px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0.20;
+            animation: bounce 1.8s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, -10px); }
+        }
+
+        .scroll-mouse {
+            width: 24px;
+            height: 40px;
+            border-radius: 999px;
+            border: 2px solid rgba(255,255,255,0.80);
+            display: flex;
+            justify-content: center;
+            padding-top: 8px;
+        }
+
+        .scroll-dot {
+            width: 4px;
+            height: 8px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.90);
+        }
+
+        /* Section base */
+        .section {
+            padding: 100px 0;
+            overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .section { padding: 140px 0; }
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        @media (min-width: 768px) {
+            .section-title { font-size: 56px; }
+        }
+
+        .section-desc {
+            text-align: center;
+            color: var(--muted);
+            font-size: 18px;
+            max-width: 56rem;
+            margin: 0 auto 60px;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        /* About section */
+        .about-grid {
+            display: grid;
+            gap: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .about-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .about-card {
+            padding: 36px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+        }
+
+        .about-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(46, 202, 127, 0.30);
+            background: rgba(46, 202, 127, 0.05);
+        }
+
+        .about-card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: grid;
+            place-items: center;
+            font-size: 26px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .about-card h3 {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .about-card p {
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* Research section */
+        .research-top-desc {
+            display: grid;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        @media (min-width: 768px) {
+            .research-top-desc { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .research-point {
+            padding: 24px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+            transition: transform 0.25s ease, border-color 0.25s ease;
+        }
+
+        .research-point:hover {
+            transform: translateY(-4px);
+            border-color: rgba(123, 97, 255, 0.30);
+        }
+
+        .research-point-num {
+            font-size: 32px;
+            font-weight: 900;
+            background: linear-gradient(to right, var(--green), var(--purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 12px;
+        }
+
+        .research-point p {
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Tech flow */
+        .tech-flow {
+            display: grid;
+            gap: 0;
+            position: relative;
+        }
+
+        @media (min-width: 768px) {
+            .tech-flow { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        .tech-step {
+            padding: 36px 28px;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.02);
+            transition: background 0.3s ease;
+        }
+
+        .tech-step:hover {
+            background: rgba(46, 202, 127, 0.05);
+        }
+
+        .tech-step:first-child {
+            border-radius: 20px 0 0 20px;
+        }
+
+        .tech-step:last-child {
+            border-radius: 0 20px 20px 0;
+        }
+
+        @media (max-width: 767px) {
+            .tech-step:first-child { border-radius: 20px 20px 0 0; }
+            .tech-step:last-child { border-radius: 0 0 20px 20px; }
+        }
+
+        .tech-step-num {
+            font-size: 48px;
+            font-weight: 900;
+            color: rgba(46, 202, 127, 0.15);
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        .tech-step h4 {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--green);
+        }
+
+        .tech-step p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .tech-arrow {
+            position: absolute;
+            right: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            color: var(--green);
+            font-size: 20px;
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .tech-arrow { display: block; }
+        }
+
+        .tech-step:last-child .tech-arrow { display: none; }
+
+        /* Results subsection */
+        .results-highlight {
+            margin-top: 60px;
+            padding: 40px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, rgba(46, 202, 127, 0.08), rgba(123, 97, 255, 0.08));
+            border: 1px solid rgba(46, 202, 127, 0.20);
+        }
+
+        .results-highlight h3 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: var(--green);
+        }
+
+        .results-highlight p {
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        /* Business section */
+        .biz-grid {
+            display: grid;
+            gap: 32px;
+        }
+
+        @media (min-width: 768px) {
+            .biz-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        .biz-card {
+            padding: 40px;
+            border-radius: 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .biz-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+        }
+
+        .biz-card-b {
+            background: rgba(46, 202, 127, 0.04);
+            border: 1px solid rgba(46, 202, 127, 0.25);
+        }
+
+        .biz-card-c {
+            background: rgba(123, 97, 255, 0.04);
+            border: 1px solid rgba(123, 97, 255, 0.25);
+        }
+
+        .biz-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+        }
+
+        .biz-label-b {
+            background: rgba(46, 202, 127, 0.15);
+            color: var(--green);
+            border: 1px solid rgba(46, 202, 127, 0.30);
+        }
+
+        .biz-label-c {
+            background: rgba(123, 97, 255, 0.15);
+            color: var(--purple);
+            border: 1px solid rgba(123, 97, 255, 0.30);
+        }
+
+        .biz-card h3 {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .biz-card p {
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .biz-list {
+            list-style: none;
+            display: grid;
+            gap: 12px;
+            position: relative;
+        }
+
+        .biz-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 14px;
+            color: rgba(255,255,255,0.85);
+            line-height: 1.6;
+        }
+
+        .biz-list-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            flex-shrink: 0;
+            margin-top: 7px;
+        }
+
+        .biz-list-dot-b { background: var(--green); }
+        .biz-list-dot-c { background: var(--purple); }
+
+        /* Full-width banner */
+        .biz-banner {
+            margin-top: 48px;
+            padding: 32px 40px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+        }
+
+        .biz-banner p {
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.8;
+            max-width: 60rem;
+            margin: 0 auto;
+        }
+
+        .biz-banner strong {
+            color: white;
+        }
+
+        /* Vision section */
+        .vision {
+            padding: 120px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .vision h2 {
+            font-size: 40px;
+            font-weight: 900;
+            margin-bottom: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .vision h2 { font-size: 64px; }
+        }
+
+        .vision-text {
+            max-width: 48rem;
+            margin: 0 auto;
+            color: var(--muted);
+            font-size: 20px;
+            line-height: 1.9;
+        }
+
+        .vision-highlight {
+            color: white;
+            font-weight: 700;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 60px 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            background: var(--bg);
+        }
+
+        .footer-inner {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            align-items: center;
+            text-align: center;
+        }
+
+        .footer-info {
+            color: var(--muted-2);
+            font-size: 13px;
+        }
+
+        .footer-links-bottom {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links-bottom a {
+            font-size: 13px;
+            color: var(--muted-2);
+            transition: color 0.2s;
+        }
+
+        .footer-links-bottom a:hover { color: var(--green); }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile nav */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+        }
+
+        .mobile-nav-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-nav-btn { display: block; }
+        }
+    </style>
 </head>
 <body>
-<header class="hero">
-    <div class="hero-inner container">
-        <img src="assets/xj-logo.svg" alt="小捷医疗管家 Logo" class="logo"/>
-        <div class="hero-text">
-            <p class="tag">XJ HEALTH COPILOT</p>
-            <h1>小捷，你的养成系医疗管家</h1>
-            <p>以数据驱动健康成长，用智能服务陪伴每一个家庭走向更好的自己。</p>
-        </div>
+    <div class="bg-layer" aria-hidden="true">
+        <canvas id="particles"></canvas>
     </div>
-</header>
+    <div class="glow-top" aria-hidden="true"></div>
+    <div class="glow-bottom" aria-hidden="true"></div>
 
-<main class="container">
-    <section class="panel intro">
-        <h2>公司简介 <span>COMPANY PROFILE</span></h2>
-        <p><strong>公司特征：</strong>理、工、医深度交融，围绕 AI 驱动的全链条健康管理，构建“筛查-干预-评估-优化”的医疗服务体验。
-        </p>
-        <p><strong>公司目标：</strong>打造陪伴式健康成长平台，让每位用户在可视化数据和个性化建议中形成稳定、可持续的健康习惯。
-        </p>
-        <p><strong>团队构成：</strong>由临床医学、AI 算法、健康管理与产品设计联合团队组成，兼具科研能力与产业落地经验。</p>
-    </section>
-    <section class="panel qrcode">
-        <h2>立即体验 <span>OFFICIAL QR CODES</span></h2>
-        <p>扫码即可下载 App 或关注微信公众号，获取最新健康管理服务与资讯。</p>
-        <div class="qr-grid">
-            <figure class="qr-card">
-                <img src="assets/app-qr.png" alt="App 下载二维码"/>
-                <figcaption>App 下载二维码</figcaption>
-            </figure>
-            <figure class="qr-card">
-                <img src="assets/wechat-qr.jpg" alt="微信公众号二维码"/>
-                <figcaption>微信公众号二维码</figcaption>
-            </figure>
-        </div>
-    </section>
-    <section class="grid-two">
-        <section class="panel research">
-            <h2>科研成果 <span>SCIENTIFIC RESEARCH ACHIEVEMENTS</span></h2>
-            <p class="highlight">
-                融合多模态生命数据，建立慢病风险识别与行为改善闭环，形成面向大众健康管理的智能基础模型。</p>
-            <div class="steps">
-                <div class="step">多组学与体征信号联合识别</div>
-                <div class="step">动态健康评分与趋势追踪</div>
-                <div class="step">个体化干预方案自动推荐</div>
-                <div class="step">长期效果复盘与模型进化</div>
+    <div class="content-layer">
+        <!-- Navigation -->
+        <nav class="nav" aria-label="主导航">
+            <div class="container nav-inner">
+                <a href="#" class="logo">
+                    <!-- <span class="logo-icon">AI</span> -->
+                    <img src="./assets/logo.png" alt="Logo" class="logo-icon">
+                    <span>合肥简捷爱科技有限公司</span>
+                </a>
+                <div class="nav-links">
+                    <a href="#about">公司简介</a>
+                    <a href="#research">科研成果</a>
+                    <a href="#business">商业模式</a>
+                    <a href="#vision">公司愿景</a>
+                    <a href="#contact" class="btn-primary">联系我们</a>
+                </div>
             </div>
-        </section>
+        </nav>
 
-        <section class="panel loop">
-            <h2>商业闭环 <span>BUSINESS CLOSED LOOP</span></h2>
-            <p>以“检测-监测-干预-评估-再优化”五步机制打造精准健康服务闭环。</p>
-            <ol>
-                <li>检测 Detection</li>
-                <li>监测 Monitor</li>
-                <li>干预 Intervene</li>
-                <li>评估 Assess</li>
-                <li>再优化 Re-optimization</li>
-            </ol>
-        </section>
-    </section>
+        <main>
+            <!-- Hero -->
+            <section class="hero" id="hero">
+                <div class="container">
+                    <h1 class="fade-in">
+                        基于多组学的<br>
+                        <span class="hero-gradient">精准健康智能体</span>
+                    </h1>
+                    <p class="hero-subtitle fade-in">
+                        融合临床医学、多组学与人工智能技术，为全民提供优质的康寿管理服务。<br>
+                        实现人工智能驱动下的全链条精准医疗。
+                    </p>
+                    <div class="hero-badges fade-in">
+                        <span class="badge badge-green">多组学分析</span>
+                        <span class="badge badge-purple">人工智能</span>
+                        <span class="badge">精准医疗</span>
+                        <span class="badge badge-green">慢病管理</span>
+                        <span class="badge badge-purple">智能硬件</span>
+                    </div>
+                </div>
+                <div class="scroll-hint" aria-hidden="true">
+                    <div class="scroll-mouse">
+                        <div class="scroll-dot"></div>
+                    </div>
+                </div>
+            </section>
 
-    <section class="panel vision">
-        <h2>公司愿景 <span>COMPANY VISION</span></h2>
-        <p>构建“筛-诊-疗-研-管”一体化服务体系，成为可信赖、可成长、可陪伴的医疗健康智能助手。</p>
-    </section>
-    <div class="footer">
-        <p>&copy; 2026 小捷健康 | <a href="/privacy.html">隐私政策</a></p>
+            <!-- Company Introduction -->
+            <section class="section" id="about">
+                <div class="container">
+                    <h2 class="section-title fade-in">公司简介</h2>
+                    <p class="section-desc fade-in">
+                        基于生物代谢机理，发现代谢新路径，推动人工智能赋能物质科学在医学与全民大健康中的应用。
+                    </p>
+                    <div class="about-grid">
+                        <div class="about-card glass fade-in">
+                            <div class="about-card-icon">🧬</div>
+                            <h3>技术特征</h3>
+                            <p>融合临床医学、多组学与人工智能技术，以多组学联合分析为核心，实现人工智能驱动下的全链条精准医疗。</p>
+                        </div>
+                        <div class="about-card glass fade-in">
+                            <div class="about-card-icon">🎯</div>
+                            <h3>公司目标</h3>
+                            <p>基于生物代谢机理，发现代谢新路径，推动人工智能赋能物质科学在医学与全民大健康中的应用。</p>
+                        </div>
+                        <div class="about-card glass fade-in">
+                            <div class="about-card-icon">👥</div>
+                            <h3>团队构成</h3>
+                            <p>融合临床医学、多组学与人工智能技术的跨学科团队，致力于为全民提供优质的康寿管理服务。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Scientific Research -->
+            <section class="section" id="research" style="border-top: 1px solid rgba(255,255,255,0.05);">
+                <div class="container">
+                    <h2 class="section-title fade-in">科研成果</h2>
+                    <p class="section-desc fade-in">
+                        以多组学+人工智能大模型为核心，用数据与模型构建行业不可复制的护城河。
+                    </p>
+
+                    <!-- Three pillars -->
+                    <div class="research-top-desc fade-in">
+                        <div class="research-point">
+                            <div class="research-point-num">01</div>
+                            <p>多组学联合分析的慢病分子标志物识别</p>
+                        </div>
+                        <div class="research-point">
+                            <div class="research-point-num">02</div>
+                            <p>动态健康数据驱动的慢病管理基础模型</p>
+                        </div>
+                        <div class="research-point">
+                            <div class="research-point-num">03</div>
+                            <p>养成式精准健康管理人工智能智能体服务平台</p>
+                        </div>
+                    </div>
+
+                    <!-- Tech flow -->
+                    <div class="tech-flow fade-in">
+                        <div class="tech-step">
+                            <div class="tech-step-num">01</div>
+                            <h4>样本采集</h4>
+                            <p>高通量平台与超微流体液检测，覆盖血液、尿液等多类型生物样本。</p>
+                            <span class="tech-arrow">→</span>
+                        </div>
+                        <div class="tech-step">
+                            <div class="tech-step-num">02</div>
+                            <h4>快速检测</h4>
+                            <p>纳升色谱快速检测（12分钟/样本，标准化操作流程），实现高效精准分析。</p>
+                            <span class="tech-arrow">→</span>
+                        </div>
+                        <div class="tech-step">
+                            <div class="tech-step-num">03</div>
+                            <h4>智能建模</h4>
+                            <p>分子疾病联合建模早期预案，基于人工智能的多维度数据融合分析。</p>
+                            <span class="tech-arrow">→</span>
+                        </div>
+                        <div class="tech-step">
+                            <div class="tech-step-num">04</div>
+                            <h4>健康干预</h4>
+                            <p>个性化精准健康管理方案输出，持续追踪与动态优化。</p>
+                        </div>
+                    </div>
+
+                    <!-- Key Result -->
+                    <div class="results-highlight fade-in">
+                        <h3>🔬 核心验证成果</h3>
+                        <p>已实验发现并验证与高血压等慢性疾病相关的代谢分子标志物，为早期筛查和精准干预提供了坚实的科学基础。多组学联合分析技术实现了从分子层面到临床应用的全链路贯通。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Business Model -->
+            <section class="section" id="business" style="border-top: 1px solid rgba(255,255,255,0.05);">
+                <div class="container">
+                    <h2 class="section-title fade-in">科技成果产业化与商业化目标</h2>
+                    <p class="section-desc fade-in">
+                        人工智能精准健康智能体·智能硬件全开放平台，打造「养成式」精准健康管理人工智能智能体。<br>
+                        通过"B端技术赋能+C端生态服务"双轮商业驱动模式。
+                    </p>
+
+                    <div class="biz-grid fade-in">
+                        <!-- To B -->
+                        <div class="biz-card biz-card-b">
+                            <div class="biz-label biz-label-b">● To B</div>
+                            <h3>精准医疗技术中台</h3>
+                            <p>面向药企、医院、科研机构提供全方位技术支持与服务</p>
+                            <ul class="biz-list">
+                                <li><span class="biz-list-dot biz-list-dot-b"></span>SaaS 订阅服务</li>
+                                <li><span class="biz-list-dot biz-list-dot-b"></span>项目定制化开发</li>
+                                <li><span class="biz-list-dot biz-list-dot-b"></span>技术授权及利润分成</li>
+                                <li><span class="biz-list-dot biz-list-dot-b"></span>数据服务</li>
+                            </ul>
+                        </div>
+                        <!-- To C -->
+                        <div class="biz-card biz-card-c">
+                            <div class="biz-label biz-label-c">● To C</div>
+                            <h3>全民精准健康管理入口</h3>
+                            <p>面向个人用户与智能硬件生态提供多元健康管理服务</p>
+                            <ul class="biz-list">
+                                <li><span class="biz-list-dot biz-list-dot-c"></span>硬件生态分成</li>
+                                <li><span class="biz-list-dot biz-list-dot-c"></span>会员订阅制</li>
+                                <li><span class="biz-list-dot biz-list-dot-c"></span>深度检测服务</li>
+                                <li><span class="biz-list-dot biz-list-dot-c"></span>健康保险合作</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="biz-banner fade-in">
+                        <p>以多组学联合分析为技术核心，打通多品类智能硬件数据接口，构建<strong>「硬件数据采集—多组学AI建模—个性化健康干预—长期行为引导—动态效果迭代」</strong>的全链路服务体系。以多组学+人工智能大模型为核心，用数据与模型构建行业不可复制的护城河。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Vision -->
+            <section class="vision" id="vision">
+                <div class="container">
+                    <h2 class="fade-in">
+                        <span class="hero-gradient">公司愿景</span>
+                    </h2>
+                    <p class="vision-text fade-in">
+                        以<span class="vision-highlight">多组学与人工智能</span>为双引擎，推动精准医疗从实验室走向千家万户。<br>
+                        让每一个人都能享受到<span class="vision-highlight">科学驱动的个性化健康管理</span>，<br>
+                        实现<span class="vision-highlight">全民康寿</span>的美好愿景。
+                    </p>
+                </div>
+            </section>
+
+            <!-- Contact -->
+            <section class="section" id="contact" style="border-top: 1px solid rgba(255,255,255,0.05); padding: 80px 0;">
+                <div class="container" style="text-align: center;">
+                    <h2 class="section-title fade-in" style="margin-bottom: 24px;">联系我们</h2>
+                    <p class="section-desc fade-in" style="margin-bottom: 36px;">
+                        如果您对我们的技术或合作感兴趣，欢迎与我们取得联系。
+                    </p>
+                    <a href="mailto:hefeijianjieai@163.com" class="btn-primary fade-in" style="font-size: 18px; padding: 16px 40px;">
+                        发送邮件咨询
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-inner">
+                    <div class="logo" style="font-size: 16px;">
+                        <!-- <span class="logo-icon" style="width: 28px; height: 28px; font-size: 14px; border-radius: 8px;">AI</span> -->
+                        <img src="./assets/logo.png" alt="Logo" class="logo-icon">
+                        <span>合肥简捷爱科技有限公司</span>
+                    </div>
+                    <div class="footer-links-bottom">
+                        <a href="#about">公司简介</a>
+                        <a href="#research">科研成果</a>
+                        <a href="#business">商业模式</a>
+                        <a href="#vision">公司愿景</a>
+                        <a href="#contact">联系我们</a>
+                    </div>
+                    <div class="footer-info">© 2026 合肥简捷爱科技有限公司. All rights reserved.</div>
+                </div>
+            </div>
+        </footer>
     </div>
 
-</main>
+    <script>
+        // Particle animation (same style as reference)
+        (function () {
+            const canvas = document.getElementById('particles');
+            if (!(canvas instanceof HTMLCanvasElement)) return;
+            const ctx = canvas.getContext('2d');
+            if (!ctx) return;
+
+            const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            let particles = [];
+            let mouse = { x: -100, y: -100 };
+            const connectionDistance = 180;
+            const mouseInfluence = 150;
+
+            function getParticleCount() {
+                return window.innerWidth < 768 ? 40 : 100;
+            }
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                canvas.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;opacity:0.4;pointer-events:none;';
+                init();
+            }
+
+            function init() {
+                const count = getParticleCount();
+                particles = [];
+                for (let i = 0; i < count; i++) {
+                    particles.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        vx: (Math.random() - 0.5) * 0.4,
+                        vy: (Math.random() - 0.5) * 0.4,
+                        size: Math.random() * 1.5 + 0.5,
+                    });
+                }
+            }
+
+            function draw() {
+                if (prefersReducedMotion) {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    return;
+                }
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                for (let i = 0; i < particles.length; i++) {
+                    const p = particles[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    const dxMouse = mouse.x - p.x;
+                    const dyMouse = mouse.y - p.y;
+                    const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+                    if (distMouse < mouseInfluence) {
+                        p.x += dxMouse * 0.005;
+                        p.y += dyMouse * 0.005;
+                    }
+
+                    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const p2 = particles[j];
+                        const dx = p.x - p2.x;
+                        const dy = p.y - p2.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < connectionDistance) {
+                            const opacity = (1 - dist / connectionDistance) * 0.4;
+                            ctx.strokeStyle = `rgba(123, 97, 255, ${opacity})`;
+                            ctx.lineWidth = 1.2;
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                requestAnimationFrame(draw);
+            }
+
+            window.addEventListener('resize', resize);
+            window.addEventListener('mousemove', (e) => {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+            });
+
+            resize();
+            draw();
+        })();
+
+        // Scroll-triggered fade-in animations
+        (function () {
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                },
+                { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+            );
+
+            document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+        })();
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (!targetId || targetId === '#') return;
+                const target = document.querySelector(targetId);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
