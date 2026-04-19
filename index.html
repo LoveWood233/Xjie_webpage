@@ -23,6 +23,7 @@
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
+        html { scroll-padding-top: 90px; }
         html, body { height: 100%; }
 
         body {
@@ -121,7 +122,6 @@
             height: 36px;
             border-radius: 10px;
             overflow: hidden;
-            /* background: linear-gradient(135deg, var(--green), var(--purple)); */
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -246,6 +246,12 @@
             border: 1px solid rgba(255, 255, 255, 0.10);
             background: rgba(255, 255, 255, 0.04);
             color: var(--muted);
+            transition: all 0.25s ease;
+        }
+
+        .badge:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.20);
         }
 
         .badge-green {
@@ -413,11 +419,13 @@
             line-height: 1.6;
         }
 
-        /* Tech flow */
+        /* Tech flow - Improved unified border system */
         .tech-flow {
             display: grid;
             gap: 0;
             position: relative;
+            border-radius: 20px;
+            overflow: hidden;
         }
 
         @media (min-width: 768px) {
@@ -427,26 +435,34 @@
         .tech-step {
             padding: 36px 28px;
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.06);
             background: rgba(255, 255, 255, 0.02);
             transition: background 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: none;
+            border-right: none;
         }
 
-        .tech-step:hover {
-            background: rgba(46, 202, 127, 0.05);
-        }
-
-        .tech-step:first-child {
-            border-radius: 20px 0 0 20px;
-        }
-
-        .tech-step:last-child {
-            border-radius: 0 20px 20px 0;
+        @media (min-width: 768px) {
+            .tech-step:first-child { border-left: none; }
+            .tech-step:last-child { border-right: none; }
         }
 
         @media (max-width: 767px) {
+            .tech-step { border-left: none; border-right: none; }
+            .tech-step:first-child { border-top: none; }
+            .tech-step:last-child { border-bottom: none; }
+        }
+
+        .tech-step:hover {
+            background: rgba(46, 202, 127, 0.08);
+        }
+
+        .tech-step:first-child { border-radius: 20px 0 0 0; }
+        .tech-step:last-child { border-radius: 0 20px 0 0; }
+
+        @media (max-width: 767px) {
             .tech-step:first-child { border-radius: 20px 20px 0 0; }
-            .tech-step:last-child { border-radius: 0 0 20px 20px; }
+            .tech-step:last-child { border-radius: 0 0 20px 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.06); }
         }
 
         .tech-step-num {
@@ -455,6 +471,10 @@
             color: rgba(46, 202, 127, 0.15);
             line-height: 1;
             margin-bottom: 16px;
+        }
+
+        @media (min-width: 768px) {
+            .tech-step:first-child .tech-step-num { padding-left: 0; }
         }
 
         .tech-step h4 {
@@ -595,23 +615,33 @@
 
         .biz-list li {
             display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            font-size: 14px;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
             color: rgba(255,255,255,0.85);
             line-height: 1.6;
+            padding: 12px 16px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.25s ease;
+        }
+
+        .biz-list li:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.10);
+            transform: translateX(4px);
         }
 
         .biz-list-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 999px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
             flex-shrink: 0;
-            margin-top: 7px;
         }
 
-        .biz-list-dot-b { background: var(--green); }
-        .biz-list-dot-c { background: var(--purple); }
+        .biz-list-dot-b { background: var(--green); box-shadow: 0 0 8px rgba(46, 202, 127, 0.4); }
+        .biz-list-dot-c { background: var(--purple); box-shadow: 0 0 8px rgba(123, 97, 255, 0.4); }
 
         /* Full-width banner */
         .biz-banner {
@@ -748,7 +778,6 @@
         <nav class="nav" aria-label="主导航">
             <div class="container nav-inner">
                 <a href="#" class="logo">
-                    <!-- <span class="logo-icon">AI</span> -->
                     <img src="./assets/logo.png" alt="Logo" class="logo-icon">
                     <span>合肥简捷爱科技有限公司</span>
                 </a>
@@ -817,7 +846,7 @@
             </section>
 
             <!-- Scientific Research -->
-            <section class="section" id="research" style="border-top: 1px solid rgba(255,255,255,0.05);">
+            <section class="section" id="research">
                 <div class="container">
                     <h2 class="section-title fade-in">科研成果</h2>
                     <p class="section-desc fade-in">
@@ -876,7 +905,7 @@
             </section>
 
             <!-- Business Model -->
-            <section class="section" id="business" style="border-top: 1px solid rgba(255,255,255,0.05);">
+            <section class="section" id="business">
                 <div class="container">
                     <h2 class="section-title fade-in">科技成果产业化与商业化目标</h2>
                     <p class="section-desc fade-in">
@@ -932,7 +961,7 @@
             </section>
 
             <!-- Contact -->
-            <section class="section" id="contact" style="border-top: 1px solid rgba(255,255,255,0.05); padding: 80px 0;">
+            <section class="section" id="contact">
                 <div class="container" style="text-align: center;">
                     <h2 class="section-title fade-in" style="margin-bottom: 24px;">联系我们</h2>
                     <p class="section-desc fade-in" style="margin-bottom: 36px;">
@@ -950,7 +979,6 @@
             <div class="container">
                 <div class="footer-inner">
                     <div class="logo" style="font-size: 16px;">
-                        <!-- <span class="logo-icon" style="width: 28px; height: 28px; font-size: 14px; border-radius: 8px;">AI</span> -->
                         <img src="./assets/logo.png" alt="Logo" class="logo-icon">
                         <span>合肥简捷爱科技有限公司</span>
                     </div>
@@ -962,13 +990,14 @@
                         <a href="#contact">联系我们</a>
                     </div>
                     <div class="footer-info">© 2026 合肥简捷爱科技有限公司. All rights reserved.</div>
+                    <div class="footer-info"><a href="https://beian.miit.gov.cn/" target="_blank">皖ICP备2026008853号-1</a></div>
                 </div>
             </div>
         </footer>
     </div>
 
     <script>
-        // Particle animation (same style as reference)
+        // Particle animation
         (function () {
             const canvas = document.getElementById('particles');
             if (!(canvas instanceof HTMLCanvasElement)) return;
@@ -1081,19 +1110,6 @@
 
             document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
         })();
-
-        // Smooth scroll for nav links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const targetId = this.getAttribute('href');
-                if (!targetId || targetId === '#') return;
-                const target = document.querySelector(targetId);
-                if (target) {
-                    e.preventDefault();
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
     </script>
 </body>
 </html>
