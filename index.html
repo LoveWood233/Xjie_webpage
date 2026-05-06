@@ -713,6 +713,24 @@
         .footer-info {
             color: var(--muted-2);
             font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-info-divider {
+            width: 1px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.10);
+            flex-shrink: 0;
+        }
+
+        .footer-info img {
+            height: 16px;
+            vertical-align: middle;
+            margin-right: 4px;
         }
 
         .footer-links-bottom {
@@ -989,8 +1007,14 @@
                         <a href="#vision">公司愿景</a>
                         <a href="#contact">联系我们</a>
                     </div>
-                    <div class="footer-info">© 2026 合肥简捷爱科技有限公司. All rights reserved.</div>
-                    <div class="footer-info"><a href="https://beian.miit.gov.cn/" target="_blank">皖ICP备2026008853号-1</a></div>
+                    <div class="footer-info">
+                        <span>© 2026 合肥简捷爱科技有限公司</span>
+                        <span class="footer-info-divider"></span>
+                        <a href="https://beian.miit.gov.cn/" target="_blank">皖ICP备2026008853号-1</a>
+                        <span class="footer-info-divider"></span>
+                        <span><img src="./assets/logo01.6189a29f.png" alt="Record">皖公网安备34019202002916号</span>
+                    </div>
+
                 </div>
             </div>
         </footer>
